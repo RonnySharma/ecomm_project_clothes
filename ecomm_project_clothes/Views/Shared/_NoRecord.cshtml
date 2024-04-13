@@ -1,0 +1,25 @@
+﻿<div class="container row">
+    <div class="col-12 text-center">
+       @* <div class="offset-11">
+            <div class="nav-brend dropdown">
+                <a class="nav-link dropdown-toggle text-success" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Orders By Status</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="Index">All Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusApproved">Approved Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusPending">Pending Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusCancelled">Cancelled Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusRefunded">Refunded Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusProcessing">InProcess Orders</a>
+                    <a class="dropdown-item text-center" asp-area="Admin" asp-controller="Orders" asp-action="StatusShipped">Shipped Orders</a>
+                </div>
+            </div>
+        </div>*@
+        <img src="~/images/noRecord.jpg" width="50%" />
+    </div>
+    <div class="col-12 text-center" style="color:red">
+        <br />
+        <h2>No Matching Result Found!!!</h2> <br />
+        <a asp-action="Index" class="btn btn-primary">Continue Managing</a>
+        <br />
+    </div>
+</div>  

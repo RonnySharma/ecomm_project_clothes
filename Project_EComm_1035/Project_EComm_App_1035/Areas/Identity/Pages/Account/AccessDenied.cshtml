@@ -1,0 +1,34 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+</head>
+<body>
+    <header>
+        <h1 class="text-danger">@ViewData["Title"]</h1>
+        <p class="text-danger">You do not have access to this resource.</p>
+    </header>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
+    <script>
+        // Show SweetAlert when the page loads
+        $(document).ready(function () {
+            Swal.fire({
+                title: 'Access Denied',
+                text: 'You do not have access to this resource.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
+</body>
+</html>

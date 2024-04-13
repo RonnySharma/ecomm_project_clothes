@@ -1,0 +1,158 @@
+﻿@model ecomm_project_clothes.Model.ViewModels.ProductVM
+
+@{
+    ViewData["Title"] = "Upsert";
+    var title = Model.Product.Id != 0 ? "Edit Product" : "New Product";
+}
+
+<div class="row">
+    <h2 class="text-primary border-bottom">@title</h2>
+</div>
+
+<div class="container border-bottom">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @if (Model.Product.Id != 0)
+                {
+                    <input type="hidden" asp-for="Product.Id" />
+                }
+
+                <div class="form-group">
+                    <label asp-for="Product.Name"></label>
+                    <input asp-for="Product.Name" class="form-control" />
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.Size"></label>
+                    <input asp-for="Product.Size" class="form-control" />
+                    <span asp-validation-for="Product.Size" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.ListPrice"></label>
+                    <input asp-for="Product.ListPrice" class="form-control" />
+                    <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.Price"></label>
+                    <input asp-for="Product.Price" class="form-control" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Product.Description"></label>
+                    <textarea asp-for="Product.Description" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Product.Quantity" class="form-control" />
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Product.ImgUrl"></label>
+                    <input type="file" name="files" id="uploadbox" multiple class="form-control" />
+                    <span asp-validation-for="Product.ImgUrl" class="text-danger"></span>
+                    @if (Model.Product.Id!=0)
+                    {
+                        <imp src="@Model.Product.ImgUrl"/>
+                    }
+                </div>
+
+                <!-- Add more form groups for the second column -->
+                @if (Model.Product.Id != 0)
+                {
+                    <img src="@Model.Product.ImgUrl" />
+                }
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Product.CategoryId"></label>
+                    <select asp-for="Product.CategoryId" asp-items="Model.CategoryList" class="form-control">
+                        <option value="">Select Category</option>
+                    </select>
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.ClothesTypeId"></label>
+                    <select asp-for="Product.ClothesTypeId" asp-items="Model.ClothesTypeList" class="form-control">
+                        <option value="">Select Clothes Type</option>
+                    </select>
+                    <span asp-validation-for="Product.ClothesTypeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.Price50"></label>
+                    <input asp-for="Product.Price50" class="form-control" />
+                    <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.Price75"></label>
+                    <input asp-for="Product.Price75" class="form-control" />
+                    <span asp-validation-for="Product.Price75" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Product.BrandId"></label>
+                    <select asp-for="Product.BrandId" asp-items="Model.BrandsTypeList" class="form-control">
+                        <option value="">Select Brand</option>
+                    </select>
+                    <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @if (Model.Product.Id != 0)
+                    {
+                        <partial name="_EditandBacktolist"></partial>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return valData()" class="btn btn-info form-control">Save</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.tiny.cloud/1/yceb7wqr2ps5v3vunieemb9syejgjl73j210uk6duakmo75e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "textarea",
+            plugins: "lists",
+            menubar: "file edit format"
+        });
+
+        function valData() {
+            if (document.getElementById('uploadbox').value === "") {
+                swal("Error", "Please select an image!!!", "error");
+                return false;
+            }
+        }
+    </script>
+}

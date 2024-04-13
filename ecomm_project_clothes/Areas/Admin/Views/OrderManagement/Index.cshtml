@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+<div class="col-8 offset-8">
+    <div class="nav-brend dropdown">
+        <a class="nav-link dropdown-toggle text-success" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Orders By Status</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="OrderManagement" asp-action="Index">All Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Ordermanagement" asp-action="PendingOrders">Pending Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="ApprovedOrders">Approved Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusCancelled">StatusCancelled</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusProcessing"> StatusProcessing</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusRefunded">StatusRefunded</a>
+
+        </div>
+    </div>
+</div>
+
+<div class="box-tools pull-right">
+    @using (Html.BeginForm("Searching", "OrderManagement", FormMethod.Get))
+    {
+
+        <div class="row">
+         <div class="col-md-3">
+                <div class="form-group">
+                    <label for="fromDate" class="my-label">From Date:</label>
+                <input type="date" id="fromDate" name="StartDate" class="form-control my-input" />
+                </div>
+            </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="toDate" class="my-label">To Date:</label>
+                <input type="date" id="toDate" name="endDate" class="form-control my-input" />
+
+            </div>
+
+        </div>
+        </div>
+        <div class="m-1 p-1">
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary my-button form-control ">Search</button>
+        </div>
+
+        </div>
+       
+     
+}
+</div>
+    <div class="container rounded border m-2 p-2">
+        <table id="tbldata" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Date Time</th>
+                    <th>User Name</th>
+                    <th>Total Price</th>
+                    <th>Order Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+@section Scripts
+ {
+    <script src="~/js/OrderManagement.js"></script>
+   @*  <script>
+        // Call the initialization function when the page is ready
+        $(document).ready(function () {
+            initializeOrderTable();
+        });
+    </script> *@
+ }

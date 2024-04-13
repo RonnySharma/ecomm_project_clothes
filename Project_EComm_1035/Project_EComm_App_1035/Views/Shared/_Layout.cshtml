@@ -1,0 +1,134 @@
+﻿@using Prooject_EComm_App_1035.Utility
+@*@using Microsoft.AspNetCore.Mvc*@
+@*@inject IHttpContextAccessor httpcontextAccessor*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Project_EComm_App_1035</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Project_EComm_App_1035.styles.css" asp-append-version="true" />
+    @*CSS REF*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        @if(User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Mangement</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CoverType" asp-action="Index">CoverType</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </li>
+                        }
+                        @if(User.IsInRole(SD.Role_Admin) ||User.IsInRole(SD.Role_Employee))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Company/Users</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">User</a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                    <!-- Inside the main content section -->
+                    <div class="container">
+                       @* <h1>Product Details</h1>
+                        <!-- Product information -->
+                        <p>Product Name: Example Product</p>
+                        <p>Price: $19.99</p>*@
+
+                        <!-- Add to Cart button -->
+                        <button id="add-to-cart-button" onclick="addToCart()">Add to Cart</button>
+                    </div>
+
+                    <!-- JavaScript code -->
+                    <script>
+                        function addToCart() {
+                            // Get the product details
+                            //var productId = "12345";
+                            //var productName = "Example Product";
+                            //var productPrice = 19.99;
+
+                            //// Create an object representing the product
+                            //var product = {
+                            //    id: productId,
+                            //    name: productName,
+                            //    price: productPrice
+                            //};
+
+                            // Check if a cart already exists in local storage
+                            var cart = localStorage.getItem("cart");
+                            if (cart) {
+                                // If a cart exists, parse the JSON string into an array
+                                cart = JSON.parse(cart);
+                            } else {
+                                // If no cart exists, create an empty array
+                                cart = [];
+                            }
+
+                            // Add the product to the cart
+                            cart.push(product);
+
+                            // Save the updated cart back to local storage
+                            localStorage.setItem("cart", JSON.stringify(cart));
+
+                            // Provide some feedback to the user
+                            alert("Product added to cart!");
+                        }
+                    </script>
+
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-primary">
+            &copy; 2023 -Book Shopping App
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*JS REF*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@*@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+<div class="row">
+    <div class="col-9">
+        <h2 class="text-primary">All Orders</h2>
+    </div>
+    <div class="col-3">
+       @* <a asp-action="Index" class="btn btn-info form-control">
+            <i class="fas fa-plus"></i>&nbsp;Add New Category
+        </a>*@
+   @* </div>
+</div>*@
+@*<div class="container rounded border m-2 p-2">
+    <table id="tbldata" class="table table-bordered table-striped table-active">
+        <thead>
+            <tr>
+                <th>Order id</th>
+                <th>Date</th>
+                <th>User name</th>
+                <th>Total price </th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+*@       @* <tbody>
+            @foreach (var h in Model)
+            {
+                <tr>
+                    <td>@h.Id</td>
+                    <td>@h.OrderDate</td>
+                    <td>@h.ApplicationUser.Name</td>
+                    <td>@h.OrderTotal</td>
+                    <td>
+                        <form method="post" asp-action="Details">
+                            <input type="hidden" asp-for="@h.Id" />
+                        <button type="submit" class="btn btn-success">View Details
+                        </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>*@
+ @*   </table>
+</div>
+@section scripts
+{
+    <script src="~/js/OrderManagement.js"></script>
+}
+*@*

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+<div class="col-8 offset-8">
+    <div class="nav-brend dropdown">
+        <a class="nav-link dropdown-toggle text-success" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Orders By Status</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="OrderManagement" asp-action="Index">All Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Ordermanagement" asp-action="PendingOrders">Pending Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="ApprovedOrders">Approved Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusCancelled">StatusCancelled</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusProcessing"> StatusProcessing</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusRefunded">StatusRefunded</a>
+
+        </div>
+    </div>
+</div>
+<div class="container rounded border m-2 p-2">
+    <form asp-area="Admin" asp-controller="Ordermanagement" asp-action="ApproveSelectedOrders" method="post">
+        <table id="tbldata" class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Date Time</th>
+                    <th>User Name</th>
+                    <th>Email Id</th>
+                    <th>Total Price</th>
+                    <th>Order Status</th>
+                   @* <th class="text-center text-primary">Cancel</th>*@
+                    <th class="text-center">Approve</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.ApplicationUser.Name</td>
+                        <td>@order.ApplicationUser.Email</td>
+                        <td>@order.OrderTotal</td>
+                        <td>@order.OrderStatus</td>
+                     @*   <td class="text-center">
+                            <a asp-action="CancelOrder" asp-route-id="@order.Id" class="btn btn-warning">Cancel Order</a>
+                        </td>*@
+                        <td class="text-center">
+                            <input type="checkbox" name="selectedOrders" value="@order.Id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Approve Selected Orders</button>
+        </div>
+    </form>
+</div>
+
+

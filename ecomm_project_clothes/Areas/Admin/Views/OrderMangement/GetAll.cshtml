@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+<div class="row">
+    <div class="col-9">
+        <h2 class="text-primary">All Orders</h2>
+    </div>
+    <div class="col-3">
+    </div>
+</div>
+<div class="container rounded border m-2 p-2">
+    <table id="tbldata" class="table table-bordered table-striped table-active">
+        <thead>
+            <tr>
+                <th>Order No.</th>
+                <th>Date</th>
+                <th>user name</th>
+                <th>Total price </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var h in Model)
+            {
+                <tr>
+                    <td>@h.Id</td>
+                    <td>@h.OrderDate</td>
+                    <td>@h.ApplicationUser.Name</td>
+                    <td>@h.OrderTotal</td>
+                    <td>
+                        <a asp-action="Index" class="btn btn-info form-control">Details</a>
+                    </td>
+
+
+
+
+
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+</div>
+@*@section Scripts
+    {
+    <script src="~/js/OrderManagement.js"></script>
+}*@

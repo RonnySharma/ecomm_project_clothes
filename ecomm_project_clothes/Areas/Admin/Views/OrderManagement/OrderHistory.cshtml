@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+
+<h1>Order History</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Total Price</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderDate</td>
+                <td>@order.OrderTotal</td>
+                <td>
+                    <a asp-action="OrderDetails" asp-route-id="@order.Id">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

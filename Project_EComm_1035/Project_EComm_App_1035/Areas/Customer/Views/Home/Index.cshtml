@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Project_EComm_App_1035.Model.Product>
+<form asp-action="Index">
+    <style>
+        .search-container {
+            text-align: left;
+            margin-top: 50px;
+        }
+
+            .search-container input[type="search"] {
+                padding: 10px;
+                width: 300px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-size: 16px;
+                outline: none;
+            }
+
+            .search-container input[type="submit"] {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    </style>
+    <div class="row">
+        <div class="form-group">
+            <div class="search-container">
+                <div class="input-group">
+                    <input type="search" name="search" placeholder="search" />
+                    <input type="submit" value="search" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12  p-1" style="border:1px solid #008cba; border-radius: 5px;">
+                    <div class="card" style="border:0px;">
+                        <img src="@product.ImageUrl" height="220px" class="card-img-top rounded" />
+                        <div class="pl-1">
+                            <p class="card-title h5"><b style="color:#2c3e50">@product.Title</b></p>
+                            <p class="card-title text-primary">by <b>@product.Author</b></p>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <p>List Price: <strike><b class="">$@product.ListPrice.ToString("0.00")</b></strike></p>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <p style="color:maroon">As low as: <b class="">$@product.Price100.ToString("0.00")</b></p>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@product.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

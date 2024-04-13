@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+@{
+    ViewData["Title"] = "Searching";
+
+}
+<div class="row">
+    <h2 class="text-primary">Orders By Date</h2>
+</div>
+@*<div class="box-tools pull-right">
+    @using (Html.BeginForm("Searching", "OrderManagement", FormMethod.Get))
+    {
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="fromDate" class="my-label">From Date:</label>
+                <input type="date" id="fromDate" name="StartDate" class="form-control my-input" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="toDate" class="my-label">To Date:</label>
+                <input type="date" id="toDate" name="endDate" class="form-control my-input" />
+            </div>
+        </div>
+        <div class="m-1 p-1">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary my-button form-control ">Search</button>
+            </div>
+        </div>
+    }
+</div>*@
+<div class="row container rounded border p-2 m-2">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>UserName</th>
+                <th>Date</th>
+                <th>OrderStatus</th>
+                <th>TotalOrder</th>
+                <th>PaymentStatus</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <th>@item.OrderDate</th>
+                    <td>@item.OrderStatus</td>
+                    <td>@item.OrderTotal</td>
+                    <td>@item.PaymentStatus</td>
+                    <td>
+                        <a asp-action="Index" class="btn btn-success form-control">
+                            Back To List
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

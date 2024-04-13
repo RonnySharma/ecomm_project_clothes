@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ecomm_project_clothes.Model.OrderHeader>
+
+<div class="col-1">
+    <div class="nav-brend dropdown">
+        <a class="nav-link dropdown-toggle text-success" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Orders By Status</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="OrderManagement" asp-action="Index">All Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Ordermanagement" asp-action="PendingOrders">Pending Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="ApprovedOrders">Approved Orders</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusCancelled">StatusCancelled</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusProcessing"> StatusProcessing</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="ordermanagement" asp-action="StatusRefunded">StatusRefunded</a>
+           
+        </div>
+    </div>
+</div>
+<div class="border container p-2 m-2">
+    <table class="table table-striped table-bordered table-hover table-responsive active">
+        <thead>
+            <tr>
+                <th class="text-center text-primary">Order Id</th>
+                <th class="text-center text-primary">Customer Name</th>
+                <th class="text-center text-primary">Payment Status</th>
+                <th class="text-center text-primary">Total Amount</th>
+                <th class="text-center text-primary">Order Status</th>
+                
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center ">@item.Id</td>
+                    <td class="text-center ">@item.Name</td>
+                    <td class="text-center ">@item.PaymentStatus</td>
+                    <td class="text-center ">@item.OrderTotal</td>
+                    <td class="text-center ">@item.OrderStatus</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

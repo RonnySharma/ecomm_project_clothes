@@ -1,0 +1,93 @@
+﻿@model ShoppingCartVM
+
+<h1>User Details</h1>
+
+<div class="user-box">
+    <h2>User Information</h2>
+    <p>User Name: @Model.User.UserName</p>
+    <p>Email: @Model.User.Email</p>
+    <p>Phone Number: @Model.User.PhoneNumber</p>
+    <!-- Display other user information as needed -->
+</div>
+
+<div class="cart-items-box">
+    <h2>Cart Items</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+                <!-- Add more columns if needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListCart)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Count</td>
+                    <td>@item.Product.Price</td>
+                    <td>
+                        <a asp-action="SendOffer" asp-controller="UserOrder" asp-area="Admin" class="btn btn-success form-control">Send Offers</a>
+
+
+                     @*   <button class="btn btn-primary" id="sendOfferButton"
+                                data-user-id="@Model.User.Id"
+                                data-product-id="@item.Product.Id"
+                                data-recipient-email="@Model.User.Email"
+                                data-recipient-phone="@Model.User.PhoneNumber"
+                                data-message="Your offer message">
+                            Send Offer
+                        </button>*@
+
+
+                    </td>
+               
+
+                    <!-- Add more columns if needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Attach a click event handler to the "Send Offer" button
+        document.getElementById("sendOfferButton").addEventListener("click", function () {
+            // Retrieve data from data- attributes
+            var userId = this.getAttribute("data-user-id");
+            var productId = this.getAttribute("data-product-id");
+            var recipientEmail = this.getAttribute("data-recipient-email");
+            var recipientPhone = this.getAttribute("data-recipient-phone");
+            var message = this.getAttribute("data-message");
+
+            // Make the AJAX request here
+            $.ajax({
+                url: '/YourControllerName/SendOffer',
+                type: 'POST', // or 'GET' depending on your controller action
+                data: {
+                    userId: userId,
+                    productId: productId,
+                    recipientEmail: recipientEmail,
+                    recipientPhone: recipientPhone,
+                    message: message
+                },
+                success: function (response) {
+                    // Handle the success response here
+                    console.log('Offer sent successfully:', response);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Handle any errors here
+                    console.error('Error sending offer:', textStatus, errorThrown);
+                }
+            });
+        });
+    </script>
+
+
+}
+
+
